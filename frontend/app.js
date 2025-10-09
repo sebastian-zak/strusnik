@@ -1,43 +1,54 @@
 (() => {
-  const $ = (sel, root = document) => root.querySelector(sel);
+  const $  = sel => document.querySelector(sel);
+  const $$ = sel => [...document.querySelectorAll(sel)];
 
   const modal = $('.modal');
-  const loginForm = $('#login-form');
+  const form = $('#login-form');
   const registerBtn = $('#register-btn');
   const logoutBtn = $('#logout-btn');
+  const menuButtons = $$('.menu-btn');
 
-  $('#year').textContent = new Date().getFullYear();
+  const yearEl = $('#year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   openModal();
 
-  loginForm.addEventListener('submit', (e) => {
+  form?.addEventListener('submit', e => {
     e.preventDefault();
     closeModal();
+    toggleMenu(true);
   });
 
-  registerBtn.addEventListener('click', () => {
+  registerBtn?.addEventListener('click', () => {
     closeModal();
+    toggleMenu(true);
   });
 
-  logoutBtn.addEventListener('click', (e) => {
+  logoutBtn?.addEventListener('click', e => {
     e.preventDefault();
+    toggleMenu(false);
     openModal();
   });
 
-  function closeModal(){
-    if(!modal) return;
+  function toggleMenu(enable) {
+    menuButtons.forEach(btn => {
+      btn.disabled = !enable;
+      btn.style.cursor = enable ? 'pointer' : 'not-allowed';
+    });
+    logoutBtn?.setAttribute('aria-disabled', enable ? 'false' : 'true');
+  }
+
+  function closeModal() {
+    if (!modal) return;
     modal.style.display = 'none';
     document.body.classList.remove('modal-open');
   }
 
-  function openModal(){
-    if(!modal) return;
+  function openModal() {
+    if (!modal) return;
     modal.style.display = 'grid';
     document.body.classList.add('modal-open');
-    const login = loginForm.querySelector('input[name="login"]');
-    const pass  = loginForm.querySelector('input[name="password"]');
-    if (login) login.value = '';
-    if (pass)  pass.value  = '';
-    login?.focus();
+    form?.querySelectorAll('input').forEach(i => i.value = '');
+    form?.querySelector('input[name="login"]')?.focus();
   }
 })();
