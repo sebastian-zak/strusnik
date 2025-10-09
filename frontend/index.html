@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <title>STRUŚNIK - GRY ONLINE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="./images/favicon.png" />
+    <link rel="preload" as="image" href="./images/background.png" />
+    <link href="./styles.css" rel="stylesheet" />
+  </head>
+  <body class="modal-open">
+    <!-- ===== Modal logowania (atrapa) ===== -->
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
+      <div class="modal__card">
+        <h1 id="login-title">Zaloguj się</h1>
+        <p class="muted">To jest wersja demonstracyjna — formularz nie wysyła danych.</p>
+
+        <form id="login-form" novalidate>
+          <label class="field">
+            <span>Login</span>
+            <input type="text" name="login" autocomplete="username" placeholder="np. strusik" />
+          </label>
+
+          <label class="field">
+            <span>Hasło</span>
+            <input type="password" name="password" autocomplete="current-password" placeholder="••••••••" />
+          </label>
+
+          <div class="buttons">
+            <button type="submit" class="btn btn--primary">Zaloguj</button>
+            <button type="button" id="register-btn" class="btn btn--ghost">Utwórz konto</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- ===== /Modal ===== -->
+
+    <!-- ===== Menu po „zalogowaniu” ===== -->
+    <main class="center">
+      <nav class="menu-cta" aria-label="Główne menu">
+        <button class="menu-btn" type="button" disabled>ZAGRAJ SAMEMU</button>
+        <button class="menu-btn" type="button" disabled>ZAGRAJ Z INNYMI</button>
+        <button class="menu-btn" type="button" disabled>RANKINGI</button>
+        <a href="#" id="logout-btn" class="menu-logout" aria-disabled="true">wyloguj</a>
+      </nav>
+    </main>
+
+    <footer class="footer">
+      <small>© <span id="year"></span> Struśnik • wersja demonstracyjna</small>
+    </footer>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
